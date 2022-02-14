@@ -2,44 +2,50 @@ const assert = require("assert");
 const anchor = require("@project-serum/anchor");
 const { SystemProgram } = anchor.web3;
 
-describe("basic-2", () => {
-  const provider = anchor.Provider.local();
+describe("mysolanaapp", () => {
+  const provider = anchor.Provider.env();
 
   // Configure the client to use the local cluster.
   anchor.setProvider(provider);
 
   // Counter for the tests.
-  const counter = anchor.web3.Keypair.generate();
-
+  
   // Program for the tests.
-  const program = anchor.workspace.Basic2;
-
+  const program = anchor.workspace.Mysolanaapp;
+  
   it("Creates a counter", async () => {
+    const baseAccount = anchor.web3.Keypair.generate();
     await program.rpc.create(provider.wallet.publicKey, {
       accounts: {
-        counter: counter.publicKey,
+        baseAccount: baseAccount.publicKey,
         user: provider.wallet.publicKey,
         systemProgram: SystemProgram.programId,
       },
-      signers: [counter],
+      signers: [baseAccount],
     });
 
-    let counterAccount = await program.account.counter.fetch(counter.publicKey);
+    let account = await program.account.baseAccount.fetch(counter.publicKey);
 
-    assert.ok(counterAccount.authority.equals(provider.wallet.publicKey));
-    assert.ok(counterAccount.count.toNumber() === 0);
+    assert.ok(account.authority.equals(provider.wallet.publicKey));
+    assert.ok(account.count.toNumber() === 0);
+
+    // ??????
+    _baseAccount = baseAccount;
   });
 
   it("Updates a counter", async () => {
+    
+    // ??????
+    const baseAccount = _baseAccount;
+
     await program.rpc.increment({
       accounts: {
-        counter: counter.publicKey,
-        authority: provider.wallet.publicKey,
+        baseAccount: baseAccount.publicKey,
       },
     });
 
     const counterAccount = await program.account.counter.fetch(
-      counter.publicKey
+      baseAccount.publicKey
     );
 
     assert.ok(counterAccount.authority.equals(provider.wallet.publicKey));
