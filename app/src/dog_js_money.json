@@ -1,0 +1,20 @@
+{
+  "version": "0.1.0",
+  "name": "dog_js_money",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "prgoramSigner",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "metadata": {
+    "address": "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+  }
+}

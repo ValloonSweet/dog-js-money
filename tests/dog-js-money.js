@@ -15,7 +15,7 @@ describe("mysolanaapp", () => {
   
   it("Creates a counter", async () => {
     const baseAccount = anchor.web3.Keypair.generate();
-    await program.rpc.create(provider.wallet.publicKey, {
+    await program.rpc.create({
       accounts: {
         baseAccount: baseAccount.publicKey,
         user: provider.wallet.publicKey,
